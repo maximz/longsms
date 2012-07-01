@@ -43,8 +43,8 @@ namespace gvtexter.Controllers
 						SharpGoogleVoice gv = new SharpGoogleVoice(model.Username, model.Password);
 						foreach (var i in SplitIntoChunks(model.Text.Trim(), 160))
 						{
-							gv.SendSMS(model.To, i);
-							Thread.Sleep(500);
+							gv.SendSMS(model.To, i); // send a chunk
+							Thread.Sleep(500); // pause between chunks - Google Voice doesn't like to be hit with lots of near-simultaneous requests
 						}
 					});
 				return RedirectToAction("Index", "Home", new { redir = "success" });
