@@ -120,6 +120,7 @@
     <Content Include="static\bs2\bootstrap.css" />
     <Content Include="static\bs2\bootstrap.min.css" />
     <Content Include="static\css\style.css" />
+    <Content Include="static\css\style.min.css" />
     <Content Include="static\img\glyphicons-halflings-white.png" />
     <Content Include="static\img\glyphicons-halflings.png" />
     <Content Include="static\js\jquery-1.7.1-vsdoc.js" />
