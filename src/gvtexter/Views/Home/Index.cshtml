@@ -1,0 +1,88 @@
+﻿@model gvtexter.ViewModels.SendViewModel
+@{
+	ViewBag.Title = "Send someone a long text";
+}
+
+@section ScriptContentAtEndOfBody {
+	@if (ViewBag.redirFromSuccess != null && ViewBag.redirFromSuccess)
+	{
+		<script>
+			$('#successAlert').alert();
+		</script>   
+	}
+}
+
+@section HeroContainer {
+
+	<h1 class="hero">Long SMS</h1>
+	<h3 class="announcement">Send a long text message with Google Voice.</h3>
+	<p >Tired of having to split long messages into 160-character chunks manually? Use this instead.</p>
+
+}
+
+<div class="page-header">
+	<h1>SMS <small>Send a long SMS</small></h1>
+</div>
+
+@if (ViewBag.redirFromSuccess != null && ViewBag.redirFromSuccess)
+{
+	<div id="successAlert" class="alert alert-success">
+		<a class="close" data-dismiss="alert" href="#">&times;</a>
+		<strong>Success!</strong> Your message is currently being sent.
+	</div>
+}
+<div class="row">
+	<div class="span9">
+		@using (Html.BeginForm("SendText", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+		{
+			@Html.ValidationSummary(true)
+			<fieldset>
+				<legend>Message</legend>
+				<div class="control-group">
+					<label class="control-label" for="name">Username</label>
+					<div class="controls">
+						@Html.TextBoxFor(model => model.Username, new { @class = "input-xlarge", id = "username" })
+						<p class="help-block">What is your Google Voice username?</p>
+						@Html.ValidationMessageFor(model => model.Username)
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="pawword">Password</label>
+					<div class="controls">
+						@Html.PasswordFor(model => model.Password, new { @class = "input-xlarge", id = "password" })
+						<p class="help-block">What is your Google Voice password?</p>
+						@Html.ValidationMessageFor(model => model.Password)
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="phone">Phone</label>
+					<div class="controls">
+						@Html.TextBoxFor(model => model.To, new { @class = "input-xlarge", id = "phone" })
+						<p class="help-block">What phone number are you sending this SMS to?</p>
+						@Html.ValidationMessageFor(model => model.To)
+					</div>
+				</div>
+
+				<div class="control-group">
+					<label class="control-label" for="message">Message</label>
+					<div class="controls">
+						@Html.TextAreaFor(model => model.Text, new { @class = "input-xlarge span5", rows = "8", id = "text" })
+						<p class="help-block">Enter your long message here.</p>
+						@Html.ValidationMessageFor(model => model.Text)
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<button type="submit" class="btn btn-success btn-large">Submit</button>
+					<a href="@Url.Action("Index","Home")" class="btn btn-inverse">Cancel</a>
+				</div>
+			</fieldset>
+		}
+					
+	</div>
+	<div class="span3">
+		<h3>Your information is safe.</h3>
+		<p>This site uses 128-bit SSL to protect your data.</p>
+		<p>None of it is stored on our servers.</p>
+	</div>
+</div>
